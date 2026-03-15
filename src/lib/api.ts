@@ -1,7 +1,7 @@
-/** API base URL: from env, or production server when not on localhost */
+/** API base URL: no env needed when deploying — production builds use the deployed server */
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ||
-  (typeof window !== 'undefined' && window.location.hostname !== 'localhost'
+  (typeof process !== 'undefined' && process.env.NODE_ENV === 'production'
     ? 'https://collabortaor-server.onrender.com'
     : 'http://localhost:3000');
 
