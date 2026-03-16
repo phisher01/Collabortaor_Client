@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Collaborator Client
 
-## Getting Started
+Next.js client application for the Collaborator task board, built with the App Router and React.
 
-First, run the development server:
+### Tech stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **UI**: React 19, Tailwind CSS 4
+
+---
+
+### Project structure (high level)
+
+- **`src/app`**: App Router pages (`/`, `/login`, `/register`, `/board`)
+- **`src/components`**: Reusable UI components (e.g. `TaskCard`, `InitialsBadge`)
+- **`src/contexts`**: React context providers (e.g. auth)
+- **`src/lib/api.ts`**: API helper used for all HTTP calls
+
+---
+
+### Environment configuration
+
+The client talks to a backend API using an environment variable, with sensible defaults.
+
+- **Env file**: create `./.env.local` in the project root.
+- **Variables**:
+
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
+
+Notes:
+
+- **`NEXT_PUBLIC_API_URL`** is optional – if it is **not** set:
+  - In **development**, the client defaults to `http://localhost:3000`.
+  - In **production**, the client defaults to `https://collabortaor-server.onrender.com`.
+- You can override this in any environment by setting `NEXT_PUBLIC_API_URL`.
+
+---
+
+### Scripts
+
+All commands are run from the project root (`client` directory).
+
+- **Install dependencies**
+
+```bash
+npm install
+```
+
+- **Run development server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+By default this starts Next.js on **http://localhost:3001**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Build for production**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+- **Start production server**
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Runs the compiled app (after `npm run build`).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Lint**
 
-## Deploy on Vercel
+```bash
+npm run lint
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### How to run the app locally
+
+1. **Clone the repo** and move into the client folder:
+
+   ```bash
+   git clone <your-repo-url>
+   cd client
+   ```
+
+2. **Create env file**:
+
+   ```bash
+   copy NUL .env.local  # Windows
+   ```
+
+   Then open `.env.local` and set at least:
+
+   ```bash
+   NEXT_PUBLIC_API_URL=http://localhost:3000
+   ```
+
+3. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+4. **Start the dev server**:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open **http://localhost:3001** in your browser.
+
+Ensure your backend API is running at the URL you configured in `NEXT_PUBLIC_API_URL` (or at the default).
+
+---
+
+### Production notes
+
+- In most hosted environments, set `NEXT_PUBLIC_API_URL` as an environment variable in your hosting provider’s dashboard.
+- If you rely on the built‑in defaults, make sure the backend is reachable at:
+  - `https://collabortaor-server.onrender.com` (production), or
+  - `http://localhost:3000` (development).
+
